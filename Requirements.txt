@@ -16,3 +16,5 @@ streamlit
 unstructured
 python-dotenv
 chromadb
+OpenAIEmbeddings
+langchain-openai
