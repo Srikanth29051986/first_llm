@@ -1,14 +1,9 @@
-langchain_openai
+langchain
 langchain.document_loaders.csv_loader
-vectorstores
 langchain_community.document_loaders
 langchain.document_loaders
 langchain_text_splitters
-langchain
 langchain.chat_models
-langchain_community.vectorstores
-langchain_communitylangchain.embeddings
-langchain.schema
 PyPDF2
 langchain.document_loaders
 langchain_community
@@ -18,3 +13,4 @@ python-dotenv
 chromadb
 OpenAIEmbeddings
 langchain-openai
+pandas

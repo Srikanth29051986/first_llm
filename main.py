@@ -1,4 +1,5 @@
 from langchain_openai import OpenAIEmbeddings
+from langchain_community.embeddings import OpenAIEmbeddings
 from langchain.document_loaders.csv_loader import CSVLoader
 from langchain_community.vectorstores import chroma
 from langchain_community.document_loaders import WebBaseLoader
@@ -24,6 +25,7 @@ from langchain.chat_models import ChatOpenAI
 from PyPDF2 import PdfReader
 import os
 from langchain.schema import Document  # Import the required Document class
+import pandas as pd
 
 def main():
     st.title("KLU Chat GPT")
@@ -31,6 +33,7 @@ def main():
     # Inputs
     text_file = st.file_uploader("Upload a Text file", type=["txt"])
     pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
+    xlsx_file = st.file_uploader("Upload an Excel file", type=["xlsx", "xls"])
     '''web_address = st.text_input("Enter a web address (URL):", placeholder="https://example.com")'''
     user_query = st.text_area("Enter your query:")
 
@@ -69,7 +72,7 @@ def main():
         st.write("Documents to process:", all_documents)'''
 
         if not all_documents:
-            st.warning("No valid input provided. Please upload a file or enter a URL.")
+            #st.warning("No valid input provided. Please upload a file or enter a URL.")
             return
 
         # Splitting Text
@@ -83,7 +86,7 @@ def main():
 
         # Embedding and ChromaDB
         try:
-            embeddings = OpenAIEmbeddings(model="text-embedding-ada-002", openai_api_key=os.getenv('API_KEY'))
+            embeddings = OpenAIEmbeddings(model="text-embedding-ada-002", openai_api_key="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")
             persist_directory = "E:/Chroma_db"
             db = Chroma.from_documents(split_texts, embeddings, persist_directory=persist_directory)
         except Exception as e:
@@ -100,7 +103,7 @@ def main():
         prompt = PromptTemplate(template=template, input_variables=["context", "question"])
 
         try:
-            llm = ChatOpenAI(temperature=0.8, openai_api_key=os.getenv('API_KEY'))
+            llm = ChatOpenAI(temperature=0.8, openai_api_key="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")
             llm_chain = LLMChain(llm=llm, prompt=prompt)
 
             # Get Answer
@@ -116,3 +119,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+# This is a sample Python script.
+
